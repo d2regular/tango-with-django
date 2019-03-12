@@ -1,0 +1,26 @@
+.idea
+
+tango_with_django_project/settings*.py
+tango_with_django_project/local_settings.py
+accs.txt
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+*.sql
+*.sqlite
+
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+# C extensions
+*.so
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+
