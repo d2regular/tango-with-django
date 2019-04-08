@@ -9,4 +9,5 @@ urlpatterns = [
             views.add_page, name='add_page'),
     re_path('^category/(?P<category_name_slug>[\w\-]+)/$', views.show_category,
          name='show_category'),
+    path('register/', views.register, name='register')
 ]
