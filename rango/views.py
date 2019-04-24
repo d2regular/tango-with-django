@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
@@ -18,7 +19,12 @@ def index(request):
         'categories': category_list,
         'pages': page_list
     }
-    return render(request, 'rango/index.html', context_dict)
+
+    response = render(request, 'rango/index.html', context_dict)
+
+    visitor_cookie_handler(request, response)
+
+    return response
 
 
 def about(request):
@@ -144,3 +150,18 @@ def restricted(request):
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect(reverse('index'))
+
+
+def visitor_cookie_handler(request, response):
+    visits_cookie = int(request.COOKIES.get('visits', 1))
+    last_visit_cookie = request.COOKIES.get('last_visit', str(datetime.now()))
+    last_visit_time = datetime.strptime(last_visit_cookie[:-7],
+                                        '%Y-%m-%d %H:%M:%S')
+
+    if (datetime.now() - last_visit_time).days > 0:
+        visits_cookie += 1
+        response.set_cookie('last_visit', str(datetime.now()))
+    else:
+        response.set_cookie('last_visit', last_visit_cookie)
+
+    response.set_cookie('visits', visits_cookie)
