@@ -4,6 +4,9 @@ tango_with_django_project/settings*.py
 tango_with_django_project/local_settings.py
 accs.txt
 
+templates/rango/base_bootstrap_1_files
+templates/rango/base_bootstrap_files
+
 # Django stuff:
 *.log
 local_settings.py
